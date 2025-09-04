@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Users - Dark/Light Toggle</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="CSS/bootstrap.min.css">
+  <link rel="stylesheet" href="CSS/toastr.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<style>
+/*Light Mode*/
+body.light-mode {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+body.light-mode * {
+  color: #000000 !important;
+}
+body.light-mode table {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+body.light-mode .table thead {
+  background-color: #e9ecef !important;
+  color: #000000 !important;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+/*hereeee*/
+
+body.dark-mode {
+  color: #ffffff !important;
+}
+body.dark-mode table {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+}
+body.dark-mode .table thead {
+  background-color: #343a40 !important;
+color: #ffffff !important;
+
+}
+
+/* Navbar styling */
+.navbar.light-mode {
+  background-color: #f8f9fa !important;
+}
+.navbar.dark-mode {
+  background-color: #212529 !important;
+}
+
+/* Bigger dark/light switch */
+.form-check-input {
+  width: 3rem;
+  height: 1.6rem;
+  cursor: pointer;
+}
+#sunIcon, #moonIcon {
+  font-size: 1.1rem;
+  margin-left: 8px;
+  transition: opacity .2s ease;
+}
+</style>
+
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark ">
+    <div class="container-fluid">
+      <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand text-white" href="#">Control Panel</a>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active text-white" href="index.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="users.html">Users</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="Posts.html">Posts</a></li>
+        </ul>
+
+        <div class="form-check form-switch d-flex align-items-center">
+          <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+          <label class="form-check-label ms-2" for="darkModeSwitch">
+            <i class="fa-solid fa-sun text-warning" id="sunIcon"></i>
+            <i class="fa-solid fa-moon text-light d-none" id="moonIcon"></i>
+          </label>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand ms-5" href="#">Manage Users</a>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
+        <button class="btn btn-outline-info me-5" type="button" data-bs-toggle="modal" data-bs-target="#addUserModal">
+          Add User <i class="fa-solid fa-user-plus text-white ms-2"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <table class="table" id="myTable">
+    <thead class="table-primary">
+      <tr>
+        <th>#</th><th>Name</th><th>User Name</th><th>Email</th><th>Address</th>
+        <th>Phone</th><th>Website</th><th>Company</th><th>Action</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider"></tbody>
+  </table>
+
+  <!-- Add User Modal -->
+  <div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-info text-white">
+          <h5 class="modal-title">Add New User</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="userForm">
+            <input type="hidden" id="userId">
+            <!-- fields omitted for brevity (same as yours) -->
+            <div class="mb-3"><label for="name" class="form-label">Name</label><input id="name" class="form-control" required></div>
+            <div class="mb-3"><label for="username" class="form-label">Username</label><input id="username" class="form-control" required></div>
+            <div class="mb-3"><label for="email" class="form-label">Email</label><input id="email" class="form-control" required></div>
+            <button type="submit" class="btn btn-primary">Save User</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS: jQuery first, then DataTables, then bootstrap & your scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+
+  <script src="Js/bootstrap.bundle.min.js"></script>
+
+  <!-- your custom scripts (users.js may rely on jQuery) -->
+  <script src="Js/users.js"></script>
+
+  <!-- toastr (only once) -->
+  <script src="Js/toastr.min.js"></script>
+
+  <script>
+    // toastr options
+    toastr.options = {
+      "closeButton": true, "progressBar": true, "positionClass": "toast-top-right", "timeOut": "3000"
+    };
+  </script>
+
+  <script>
+    // DataTables init + fetch users (unchanged logic but placed after jQuery)
+    $(document).ready(function () {
+      let table = $('#myTable').DataTable({
+        paging: true, searching: true, ordering: true, info: true, lengthMenu: [5, 10],
+        language: {
+          search: "search🔎 :", lengthMenu: "show _MENU_ records",
+          info: "show _START_ to _END_ out of _TOTAL_", paginate: { next: "next", previous: "previous" }
+        }
+      });
+
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then(res => res.json())
+        .then(data => {
+          data.forEach(user => {
+            table.row.add([
+              user.id, user.name, user.username, user.email,
+              `${user.address.city}, ${user.address.street}`, user.phone, user.website, user.company.name,
+              `<button class="edit bg-info rounded border border-1"><i class="fa-solid fa-user-pen text-white"></i></button>
+               <button class="delete ms-2 bg-danger rounded border border-1"><i class="fa-solid fa-trash text-white"></i></button>`
+            ]).draw();
+          });
+        }).catch(err => { console.error(err); toastr.error('Failed to load users'); });
+    });
+  </script>
+
+  <script>
+    // Theme toggle (vanilla JS) — toggles body and navbar classes, remembers in localStorage
+    (function () {
+      const switchBtn = document.getElementById("darkModeSwitch");
+      const sunIcon = document.getElementById("sunIcon");
+      const moonIcon = document.getElementById("moonIcon");
+      const navbars = document.querySelectorAll('.navbar');
+
+      function applyDark() {
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('dark-mode');
+        sunIcon.classList.add('d-none');
+        moonIcon.classList.remove('d-none');
+        navbars.forEach(n => { n.classList.remove('bg-light','navbar-light'); n.classList.add('bg-dark','navbar-dark'); });
+      }
+      function applyLight() {
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+        moonIcon.classList.add('d-none');
+        sunIcon.classList.remove('d-none');
+        navbars.forEach(n => { n.classList.remove('bg-dark','navbar-dark'); n.classList.add('bg-light','navbar-light'); });
+      }
+
+      // Initial state from localStorage (default: light)
+      const saved = localStorage.getItem('theme') || 'light';
+      if (saved === 'dark') { applyDark(); switchBtn.checked = true; } else { applyLight(); switchBtn.checked = false; }
+
+      // Toggle
+      switchBtn.addEventListener('change', () => {
+        if (switchBtn.checked) { applyDark(); localStorage.setItem('theme','dark'); }
+        else { applyLight(); localStorage.setItem('theme','light'); }
+      });
+    })();
+  </script>
+
+</body>
+</html>

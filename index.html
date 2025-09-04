@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <!-- Toastr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body class="all">
+<nav class="navbar navbar-expand-lg bg-dark  navbar-dark ">
+  <div class="container-fluid">
+    <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand text-white" href="#">Control Panel</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="index.html">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="users.html">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" aria-disabled="true" href="Posts.html">Posts</a>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+</nav>
+
+
+
+
+    <div class="y text-center p-3  text-white ">
+    <h2 >Dashboard </h2>
+    </div>
+
+<div class="dash d-flex justify-content-around mt-5 ">
+<div class="card  mb-3 " style="width: 15rem; background-color: #272953;">
+  <div class="card-header text-white text-primary text-center"style="background-color: #272953;"><b>Users</b></div>
+  <div class="card-body d-flex justify-content-center align-items-center text-primary">
+    <p class="card-text1 text-white text-center"></p>
+  </div>
+</div>
+<div class="card  mb-3" style="width: 15rem;background-color:#272953">
+  <div class="card-header text-info text-white text-center "style="background-color: #272953;"><b>Posts</b></div>
+  <div class="card-body d-flex justify-content-center align-items-center text-info">
+    <p class="card-text2 text-white text-center"></p>
+  </div>
+  
+</div>
+<div class="card  mb-3  " style="width: 15rem;background-color:#272953 ;height: 15rem;">
+  <div class="card-header  text-white text-success text-center"><b>Comments</b></div>
+  <div class="card-body d-flex justify-content-center align-items-center text-success">
+    <p class="card-text3 text-white text-center"></p>
+  </div>
+ 
+</div>
+
+</div>
+<script>
+  toastr.options = {
+    "closeButton": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "timeOut": "3000"
+  }
+</script>
+
+    <script src="Js/main.js">  </script>
+    <script src="Js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

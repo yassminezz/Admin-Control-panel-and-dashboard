@@ -1,0 +1,89 @@
+.all{
+    background-color: #445b84;
+  
+}
+.nav-link:hover{
+    transition:scale;
+}
+.card {
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+  border-radius: 10px; 
+}
+
+.card:hover {
+  transform: scale(1.1);        
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); 
+  cursor: pointer;
+}
+/* Light Mode */
+body.light-mode {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.light-mode * {
+  color: #000000 !important;
+}
+
+/* Tables in Light Mode */
+body.light-mode table {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.light-mode table thead {
+  background-color: #e9ecef !important;
+  color: #000000 !important;
+}
+
+body.light-mode table tbody tr {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode * {
+  color: #ffffff !important;
+}
+
+/* Tables in Dark Mode */
+body.dark-mode table {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode table thead {
+  background-color: #343a40 !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode table tbody tr {
+  background-color: #2a2a2a !important;
+  color: #ffffff !important;
+}
+
+/* Navbar styling */
+.navbar.light-mode {
+  background-color: #f8f9fa !important;
+}
+
+.navbar.dark-mode {
+  background-color: #212529 !important;
+}
+
+/* Switch styling */
+.form-check-input {
+  width: 3rem;
+  height: 1.6rem;
+  cursor: pointer;
+}
+#sunIcon, #moonIcon {
+  font-size: 1.1rem;
+  margin-left: 8px;
+  transition: opacity .2s ease;
+}

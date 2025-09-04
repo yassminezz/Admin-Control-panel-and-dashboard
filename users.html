@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Users - Dark/Light Toggle</title>
 
   <!-- CSS -->
@@ -11,66 +12,87 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-<style>
-/*Light Mode*/
-body.light-mode {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-body.light-mode * {
-  color: #000000 !important;
-}
-body.light-mode table {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-body.light-mode .table thead {
-  background-color: #e9ecef !important;
-  color: #000000 !important;
-}
+  <style>
+    /*Light Mode*/
+    body.light-mode {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
 
-/* Dark Mode */
-body.dark-mode {
-  background-color: #121212 !important;
-  color: #ffffff !important;
-}
-/*hereeee*/
+    body.light-mode * {
+      color: #000000 !important;
+    }
 
-body.dark-mode {
-  color: #ffffff !important;
-}
-body.dark-mode table {
-  background-color: #1e1e1e !important;
-  color: #ffffff !important;
-}
-body.dark-mode .table thead {
-  background-color: #343a40 !important;
-color: #ffffff !important;
+    body.light-mode table {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
 
-}
+    body.light-mode .table thead {
+      background-color: #e9ecef !important;
+      color: #000000 !important;
+    }
 
-/* Navbar styling */
-.navbar.light-mode {
-  background-color: #f8f9fa !important;
-}
-.navbar.dark-mode {
-  background-color: #212529 !important;
-}
+    /* Dark Mode */
+    body.dark-mode {
+      background-color: #121212 !important;
+      color: #ffffff !important;
+    }
 
-/* Bigger dark/light switch */
-.form-check-input {
-  width: 3rem;
-  height: 1.6rem;
-  cursor: pointer;
-}
-#sunIcon, #moonIcon {
-  font-size: 1.1rem;
-  margin-left: 8px;
-  transition: opacity .2s ease;
-}
-</style>
+    /*hereeee*/
+
+    body.dark-mode {
+      color: #ffffff !important;
+    }
+
+    body.dark-mode table {
+      background-color: #1e1e1e !important;
+      color: #ffffff !important;
+    }
+
+    body.dark-mode .table thead {
+      background-color: #343a40 !important;
+      color: #ffffff !important;
+
+    }
+
+    /* Navbar styling */
+    .navbar.light-mode {
+      background-color: #f8f9fa !important;
+    }
+
+    .navbar.dark-mode {
+      background-color: #212529 !important;
+    }
+
+    /* Bigger dark/light switch */
+    .form-check-input {
+      width: 3rem;
+      height: 1.6rem;
+      cursor: pointer;
+    }
+
+    #sunIcon,
+    #moonIcon {
+      font-size: 1.1rem;
+      margin-left: 8px;
+      transition: opacity .2s ease;
+    }
+
+    /* ⭐ Favourite star toggle */
+    .favourite .fa-star {
+      color: gray;
+      /* default gray */
+    }
+
+    .favourite.active .fa-star {
+      color: gold;
+      /* yellow when active */
+    }
+  </style>
 
 </head>
+
 <body>
 
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark ">
@@ -116,8 +138,15 @@ color: #ffffff !important;
   <table class="table" id="myTable">
     <thead class="table-primary">
       <tr>
-        <th>#</th><th>Name</th><th>User Name</th><th>Email</th><th>Address</th>
-        <th>Phone</th><th>Website</th><th>Company</th><th>Action</th>
+        <th>#</th>
+        <th>Name</th>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Website</th>
+        <th>Company</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody class="table-group-divider"></tbody>
@@ -135,9 +164,12 @@ color: #ffffff !important;
           <form id="userForm">
             <input type="hidden" id="userId">
             <!-- fields omitted for brevity (same as yours) -->
-            <div class="mb-3"><label for="name" class="form-label">Name</label><input id="name" class="form-control" required></div>
-            <div class="mb-3"><label for="username" class="form-label">Username</label><input id="username" class="form-control" required></div>
-            <div class="mb-3"><label for="email" class="form-label">Email</label><input id="email" class="form-control" required></div>
+            <div class="mb-3"><label for="name" class="form-label">Name</label><input id="name" class="form-control"
+                required></div>
+            <div class="mb-3"><label for="username" class="form-label">Username</label><input id="username"
+                class="form-control" required></div>
+            <div class="mb-3"><label for="email" class="form-label">Email</label><input id="email" class="form-control"
+                required></div>
             <button type="submit" class="btn btn-primary">Save User</button>
           </form>
         </div>
@@ -181,14 +213,37 @@ color: #ffffff !important;
         .then(data => {
           data.forEach(user => {
             table.row.add([
-              user.id, user.name, user.username, user.email,
-              `${user.address.city}, ${user.address.street}`, user.phone, user.website, user.company.name,
-              `<button class="edit bg-info rounded border border-1"><i class="fa-solid fa-user-pen text-white"></i></button>
-               <button class="delete ms-2 bg-danger rounded border border-1"><i class="fa-solid fa-trash text-white"></i></button>`
+              user.id,
+              user.name,
+              user.username,
+              user.email,
+              `${user.address.city}, ${user.address.street}`,
+              user.phone,
+              user.website,
+              user.company.name,
+              `
+          <div class="actions d-flex justify-content-around">
+            <button class="edit bg-info rounded border border-1">
+              <i class="fa-solid fa-user-pen text-white"></i>
+            </button>
+            <button class="delete ms-2 bg-danger rounded border border-1">
+              <i class="fa-solid fa-trash text-white"></i>
+            </button>
+          <span class="favourite" data-id="${user.id}">
+  <i class="fa-solid fa-star"></i>
+</span>
+
+          </div>
+          `
             ]).draw();
           });
-        }).catch(err => { console.error(err); toastr.error('Failed to load users'); });
+        })
+        .catch(err => {
+          console.error(err);
+          toastr.error('Failed to load users');
+        });
     });
+
   </script>
 
   <script>
@@ -204,14 +259,14 @@ color: #ffffff !important;
         document.body.classList.add('dark-mode');
         sunIcon.classList.add('d-none');
         moonIcon.classList.remove('d-none');
-        navbars.forEach(n => { n.classList.remove('bg-light','navbar-light'); n.classList.add('bg-dark','navbar-dark'); });
+        navbars.forEach(n => { n.classList.remove('bg-light', 'navbar-light'); n.classList.add('bg-dark', 'navbar-dark'); });
       }
       function applyLight() {
         document.body.classList.remove('dark-mode');
         document.body.classList.add('light-mode');
         moonIcon.classList.add('d-none');
         sunIcon.classList.remove('d-none');
-        navbars.forEach(n => { n.classList.remove('bg-dark','navbar-dark'); n.classList.add('bg-light','navbar-light'); });
+        navbars.forEach(n => { n.classList.remove('bg-dark', 'navbar-dark'); n.classList.add('bg-light', 'navbar-light'); });
       }
 
       // Initial state from localStorage (default: light)
@@ -220,11 +275,23 @@ color: #ffffff !important;
 
       // Toggle
       switchBtn.addEventListener('change', () => {
-        if (switchBtn.checked) { applyDark(); localStorage.setItem('theme','dark'); }
-        else { applyLight(); localStorage.setItem('theme','light'); }
+        if (switchBtn.checked) { applyDark(); localStorage.setItem('theme', 'dark'); }
+        else { applyLight(); localStorage.setItem('theme', 'light'); }
       });
     })();
+
+    // ⭐ Favourite toggle (color star on click)
+    $(document).on("click", ".favourite", function () {
+      $(this).toggleClass("active");
+    });
   </script>
 
+
+
+
+
+
+
 </body>
+
 </html>

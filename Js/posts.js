@@ -1,4 +1,7 @@
 // Fetch & show posts
+// Fetch & show posts + comments
+// Fetch & show posts + comments
+// Fetch & show posts + comments
 async function showPosts() {
   let response = await fetch("https://jsonplaceholder.typicode.com/posts");
   let postsLst = await response.json();
@@ -6,7 +9,8 @@ async function showPosts() {
   let tbody = document.querySelector(".table-group-divider");
   tbody.innerHTML = "";
 
-  postsLst.forEach(p => {
+  for (let p of postsLst) {
+    // Row للبوست نفسه
     let tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${p.id}</td>
@@ -14,18 +18,57 @@ async function showPosts() {
       <td>${p.title}</td>
       <td>${p.body}</td>
       <td>
-          <button class="edit bg-info rounded border border-1">
-            <i class="fa-solid fa-pen text-white"></i>
-          </button>
-          <button class="delete ms-2 bg-danger rounded border border-1">
-            <i class="fa-solid fa-trash text-white"></i>
-          </button>
-
+        <button class="toggle-comments btn btn-sm btn-secondary" data-postid="${p.id}">
+          <i class="fa-solid fa-angle-down"></i>
+        </button>
+        <button class="edit bg-info rounded border border-1">
+          <i class="fa-solid fa-pen text-white"></i>
+        </button>
+        <button class="delete ms-2 bg-danger rounded border border-1">
+          <i class="fa-solid fa-trash text-white"></i>
+        </button>
       </td>
     `;
     tbody.appendChild(tr);
-  });
+
+    // Row للكومنتات (مخفي في الأول)
+    let commentsTr = document.createElement("tr");
+    commentsTr.style.display = "none"; // مخفي
+    commentsTr.innerHTML = `
+      <td colspan="5">
+        <div class="comments" id="comments-${p.id}">
+          <em>Loading comments...</em>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(commentsTr);
+
+    // تحميل الكومنتات
+    let commentsRes = await fetch(`https://jsonplaceholder.typicode.com/posts/${p.id}/comments`);
+    let comments = await commentsRes.json();
+
+    let commentsDiv = commentsTr.querySelector(`#comments-${p.id}`);
+    commentsDiv.innerHTML = comments.map(c => `
+      <div class="border rounded p-2 mb-2">
+        <strong>${c.name}</strong> <span class="text-muted">(${c.email})</span>
+        <p>${c.body}</p>
+      </div>
+    `).join("");
+
+    // زرار التوجل
+    tr.querySelector(".toggle-comments").addEventListener("click", function () {
+      if (commentsTr.style.display === "none") {
+        commentsTr.style.display = "table-row";
+        this.innerHTML = `<i class="fa-solid fa-angle-up"></i>`; // سهم لفوق
+      } else {
+        commentsTr.style.display = "none";
+        this.innerHTML = `<i class="fa-solid fa-angle-down"></i>`; // سهم لتحت
+      }
+    });
+  }
 }
+
+
 document.addEventListener("DOMContentLoaded", showPosts);
 
 // Delete post

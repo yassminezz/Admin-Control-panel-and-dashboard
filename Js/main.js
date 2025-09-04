@@ -1,13 +1,3 @@
-// const { get } = require("jquery");
-
-// let $users =$(".card-text1");
-// let $posts =$(".card-text2");
-// let $comments =$(".card-text3");
-
-// $.get(' https://jsonplaceholder.typicode.com/users',(data)=>{
-//     let $d = data.ja
-// $users.html('data');
-// })
 
 
 async function loadData() {
@@ -17,7 +7,7 @@ async function loadData() {
   let response2 = await fetch("https://jsonplaceholder.typicode.com/posts");
   let posts = await response2.json();
 
-  let response3 = await fetch("https://jsonplaceholder.typicode.com/comments?postId=1");
+  let response3 = await fetch("https://jsonplaceholder.typicode.com/comments");
   let comments = await response3.json();
 
   let p1 = document.querySelector(".card-text1");
@@ -30,10 +20,3 @@ async function loadData() {
   p3.innerHTML = `<i class="fa-solid fa-arrows-turn-right"></i> <b>${comments.length}</b>`;
 }
 loadData();
-
-// $.get(' https://jsonplaceholder.typicode.com/posts',(data)=>{
-
-// })
-//  $.get('https://jsonplaceholder.typicode.com/comments?postId=',(data)=>{
-
-//  })
